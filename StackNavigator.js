@@ -3,79 +3,82 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
 
 import HomeScreen from "./screens/HomeScreen";
 import SavedScreen from "./screens/SavedScreen";
 import BookingsScreen from "./screens/BookingScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import { NavigationContainer } from "@react-navigation/native";
+
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
 
   function BottomTabs() {
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: "Home",
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Entypo name="home" size={24} color="black" />
-            ) : (
-              <AntDesign name="home" size={24} color="black" />
-            ),
-        }}
-      />
+    return (
+        <Tab.Navigator>
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                tabBarLabel: "Home",
+                headerShown: false,
+                tabBarIcon: ({ focused }) =>
+                    focused ? (
+                    <Entypo name="home" size={24} color="black" />
+                    ) : (
+                    <AntDesign name="home" size={24} color="black" />
+                    ),
+                }}
+            />
 
-      <Tab.Screen
-        name="Saved"
-        component={SavedScreen}
-        options={{
-          tabBarLabel: "Saved",
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Entypo name="heart" size={24} color="black" />
-            ) : (
-              <AntDesign name="hearto" size={24} color="black" />
-            ),
-        }}
-      />
+            <Tab.Screen
+                name="Saved"
+                component={SavedScreen}
+                options={{
+                tabBarLabel: "Saved",
+                headerShown: false,
+                tabBarIcon: ({ focused }) =>
+                    focused ? (
+                    <Entypo name="heart" size={24} color="black" />
+                    ) : (
+                    <AntDesign name="hearto" size={24} color="black" />
+                    ),
+                }}
+            />
 
-      <Tab.Screen
-        name="Bookings"
-        component={BookingsScreen}
-        options={{
-          tabBarLabel: "Bookings",
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Ionicons name="notifications" size={24} color="black" />
-            ) : (
-              <Ionicons name="notifications-outline" size={24} color="black" />
-            ),
-        }}
-      />
+            <Tab.Screen
+                name="Bookings"
+                component={BookingsScreen}
+                options={{
+                tabBarLabel: "Bookings",
+                headerShown: false,
+                tabBarIcon: ({ focused }) =>
+                    focused ? (
+                    <Ionicons name="notifications" size={24} color="black" />
+                    ) : (
+                    <Ionicons name="notifications-outline" size={24} color="black" />
+                    ),
+                }}
+            />
 
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarLabel: "Profile",
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Ionicons name="person" size={24} color="black" />
-            ) : (
-              <Ionicons name="person-outline" size={24} color="black" />
-            ),
-        }}
-      />
-    </Tab.Navigator>;
+            <Tab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                tabBarLabel: "Profile",
+                headerShown: false,
+                tabBarIcon: ({ focused }) =>
+                    focused ? (
+                    <Ionicons name="person" size={24} color="black" />
+                    ) : (
+                    <Ionicons name="person-outline" size={24} color="black" />
+                    ),
+                }}
+            />
+        </Tab.Navigator>
+    )
   }
 
   return (
