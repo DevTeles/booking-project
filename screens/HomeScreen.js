@@ -15,6 +15,9 @@ import DatePicker from "react-native-date-ranges";
 
 const HomeScreen = () => {
   const [selectedDates, setSelectedDates] = useState();
+  const [rooms, setRooms] = useState(1);
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -83,7 +86,7 @@ const HomeScreen = () => {
             }}
           >
             <Feather color="black" size={24} name="search" />
-            <TextInput placeholder="Enter your destination" />
+            <TextInput placeholderTextColor="black" placeholder="Enter your destination" />
           </Pressable>
 
           {/* Selected Dates */}
