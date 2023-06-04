@@ -221,7 +221,69 @@ const HomeScreen = () => {
         onTouchOutside={() => setModalVisibile(!modalVisibile)}
       >
         <ModalContent style={{ width: "100%", height: 310 }}>
-          <Text>teste</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginVertical: 15,
+            }}
+          >
+            <Text style={{ fontSize: 16, fontWeight: "500" }}>Rooms</Text>
+            <Pressable
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
+              <Pressable
+                style={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: 13,
+                  borderColor: "#BEBEBE",
+                  backgroundColor: "#E0E0E0",
+                }}
+              >
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    fontWeight: "600",
+                    paddingHorizontal: 6,
+                  }}
+                >
+                  -
+                </Text>
+              </Pressable>
+              <Pressable>
+                <Text style={{
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "500",
+                    paddingHorizontal: 6,
+                  }}>{rooms}</Text>
+              </Pressable>
+
+              <Pressable
+                style={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: 13,
+                  borderColor: "#BEBEBE",
+                  backgroundColor: "#E0E0E0",
+                }}
+              >
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    fontWeight: "600",
+                    paddingHorizontal: 6,
+                  }}
+                >
+                  +
+                </Text>
+              </Pressable>
+            </Pressable>
+          </View>
         </ModalContent>
       </BottomModal>
     </>
