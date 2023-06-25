@@ -9,6 +9,7 @@ import HomeScreen from "./screens/HomeScreen";
 import SavedScreen from "./screens/SavedScreen";
 import BookingsScreen from "./screens/BookingScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import SearchScreen from "./screens/SearchScreen";
 
 
 const StackNavigator = () => {
@@ -85,6 +86,7 @@ const StackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Main" component={BottomTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="Search" component={SearchScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
