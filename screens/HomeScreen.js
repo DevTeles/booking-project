@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Image,
   Pressable,
@@ -9,7 +10,7 @@ import {
   View,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import Header from "../components/Header";
 import DatePicker from "react-native-date-ranges";
@@ -25,6 +26,7 @@ import {
 const HomeScreen = () => {
   const [selectedDates, setSelectedDates] = useState();
   const [rooms, setRooms] = useState(1);
+  const route = useRoute()
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
   const [modalVisibile, setModalVisibile] = useState(false);
@@ -70,6 +72,34 @@ const HomeScreen = () => {
     );
   };
 
+  const searchPlaces = (place) => {
+    if(!route.params || !selectedDates) {
+      Alert.alert(
+        "Invalide Details",
+        "Please enter all the details",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed")}
+        ],
+        { cancelable: false }
+      );
+    }
+
+    if (route.params && selectedDates) {
+      navigation.navigate("Places", {
+        rooms: rooms,
+        adults: adults,
+        children: children,
+        selectedDates: selectedDates,
+        place: place
+      })
+    }
+  }
+
   return (
     <>
       <View>
@@ -100,7 +130,7 @@ const HomeScreen = () => {
               <Feather color="black" size={24} name="search" />
               <TextInput
                 placeholderTextColor="black"
-                placeholder="Enter your destination"
+                placeholder={route?.params ? route.params.input : "Enter your destination"}
               />
             </Pressable>
 
@@ -174,6 +204,7 @@ const HomeScreen = () => {
 
             {/* Search Button */}
             <Pressable
+              onPress={() => searchPlaces(route?.params.input)}
               style={{
                 paddingHorizontal: 10,
                 borderColor: "#FFC72C",

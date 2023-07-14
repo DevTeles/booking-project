@@ -1,10 +1,12 @@
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
-import { Feather } from "@expo/vector-icons";
-import SearchResults from "../components/SearchResults";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Octicons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import PropertyCard from "../components/PropertyCard";
 
-const SearchScreen = () => {
-  const [input, setInput] = useState("")
+const PlacesScreen = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
 
   const data = [
     {
@@ -467,79 +469,80 @@ const SearchScreen = () => {
       ],
     },
   ];
-  
-  const filters = [
-    {
-      id: "0",
-      filter: "cost:Low to High",
-    },
-    {
-      id: "1",
-      filter: "cost:High to Low",
-    },
-  ];
-  
-  const services = [
-    {
-      id: "0",
-      name: "room service",
-    },
-    {
-      id: "2",
-      name: "free wifi",
-    },
-    {
-      id: "3",
-      name: "Family rooms",
-    },
-    {
-      id: "4",
-      name: "Free Parking",
-    },
-    {
-      id: "5",
-      name: "swimming pool",
-    },
-    {
-      id: "6",
-      name: "Restaurant",
-    },
-    {
-      id: "7",
-      name: "Fitness center",
-    },
-  ];
-  
-//   <Image
-//     style={{ width: 200, height: 50, resizeMode: "cover" }}
-//     source={{
-//       uri: "https://assets.stickpng.com/thumbs/5a32a821cb9a85480a628f8f.png",
-//     }}
-//   />;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      title: "Popular Places",
+      headerTitleStyle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "white",
+      },
+      headerStyle: {
+        backgroundColor: "#003580",
+        height: 110,
+        borderBottomColor: "transparent",
+        shadowColor: "transparent",
+      },
+    });
+  }, []);
 
   return (
-    <SafeAreaView>
-      <View
+    <View>
+      <Pressable
         style={{
-          padding: 10,
-          margin: 10,
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          borderColor: "#FFC72C",
-          borderWidth: 4,
-          borderRadius: 10,
+          paddingHorizontal: 20,
+          padding: 12,
+          backgroundColor: "white",
         }}
       >
-        <TextInput value={input} onChangeText={(text) => setInput(text)} placeholder="Enter Your Destination" />
-        <Feather name="search" size={22} color="black" />
-      </View>
+        <Pressable style={{ flexDirection: "row", alignItems: "center" }}>
+          <Octicons name="arrow-switch" size={22} color="gray" />
+          <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
+            Sort
+          </Text>
+        </Pressable>
 
-      <SearchResults data={data} input={input} setInput={setInput} />
-    </SafeAreaView>
+        <Pressable style={{ flexDirection: "row", alignItems: "center" }}>
+          <Ionicons name="filter" size={22} color="gray" />
+          <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
+            Filter
+          </Text>
+        </Pressable>
+
+        <Pressable style={{ flexDirection: "row", alignItems: "center" }}>
+          <FontAwesome5 name="map-marker-alt" size={22} color="gray" />
+          <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
+            Map
+          </Text>
+        </Pressable>
+      </Pressable>
+
+      <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
+        {data
+          ?.filter((item) => item.place === route.params.place)
+          .map((item) =>
+            item.properties.map((propperty, index) => (
+              <PropertyCard
+                key={index}
+                rooms={route.params}
+                children={route.params.children}
+                adults={route.params.adults}
+                selectedDates={route.params.selectedDates}
+                property={propperty}
+                availableRooms={propperty.rooms}
+              />
+            ))
+          )}
+      </ScrollView>
+    </View>
   );
 };
 
-export default SearchScreen;
+export default PlacesScreen;
 
 const styles = StyleSheet.create({});
